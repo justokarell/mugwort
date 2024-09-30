@@ -22,3 +22,32 @@ router.post('/create', async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+router.get('/:pollId', async (req, res) => {
+    const { pollId } = req.params;
+
+    try {
+        const poll = await Poll.findByPk(pollId, {
+            include: [Option]
+        });
+        res.render('poll', { poll });
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching poll', error: err });
+    }
+});
+
+router.get('/user/:userId/history', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const polls = await Poll.findAll({ where: { userId }, include: [Option] });
+        res.render('history', { polls });
+    } catch (err) {
+        res.status(500).json({ message: 'Error fetching history', error: err });
+    }
+});
+
+
+

@@ -8,3 +8,5 @@ sequelize.sync({ force: true }).then(() => {
 }).catch(err => {
     console.error('Error syncing database', err);
 });
+
+require('dotenv').config();
