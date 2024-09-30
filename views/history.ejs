@@ -1,0 +1,6 @@
+<h1>Your Polls</h1>
+<ul>
+    <% polls.forEach(poll => { %>
+        <li><a href="/polls/<%= poll.id %>"><%= poll.question %></a></li>
+    <% }) %>
+</ul>
